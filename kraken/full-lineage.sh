@@ -38,7 +38,7 @@ split("",a)
 }' temp.full-taxonomy.txt > temp2.full-taxonomy.text
 
 # join with original kraken output
-awk 'NR==FNR{ seen[$3]=$1FS$2FS$4; next } NF{ print seen[$1], $0 }' \
+awk 'BEGIN { FS="\t"; OFS="\t" } NR==FNR{ seen[$3]=$1FS$2FS$4; next } NF{ print seen[$1], $0 }' \
 $KRAKEN temp2.full-taxonomy.text > temp3.full-taxonomy.text
 
 # add headers
